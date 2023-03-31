@@ -11,4 +11,9 @@ public class CommonEnum : MonoBehaviour
         LEFT,
         RIGHT
     }
+
+    public enum ObstacleType
+    {
+        CAR
+    }
 }

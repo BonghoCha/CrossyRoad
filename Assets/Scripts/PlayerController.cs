@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Die();
+        }
+    }
+
     [SerializeField] private Transform _player;
     [SerializeField] private Transform _root;
     [SerializeField] private Animator _animator;
@@ -55,5 +63,10 @@ public class PlayerController : MonoBehaviour
         {
             isMoving = false;
         });
+    }
+
+    public void Die()
+    {
+        _player.DOScale(new Vector3(1f, 0.1f, 1f), 0.1f);
     }
 }
