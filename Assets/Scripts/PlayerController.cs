@@ -31,31 +31,32 @@ public class PlayerController : MonoBehaviour
         {
             case CommonEnum.PlayerDirection.FRONT:
             {
-                _root.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                nextPosition += new Vector3(0, 0, 1); 
+                _root.rotation = CommonValue.PlayerFrontRotation;
+                nextPosition += CommonValue.PlayerFrontBackVector; 
                 break;
             }
             case CommonEnum.PlayerDirection.BACK:
             {
-                _root.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-                nextPosition += new Vector3(0, 0, -1);
+                _root.rotation = CommonValue.PlayerBackRotation;
+                nextPosition -= CommonValue.PlayerFrontBackVector;
                 break;
             }
             case CommonEnum.PlayerDirection.LEFT:
             {
-                _root.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-                nextPosition += new Vector3(-1, 0, 0);
+                _root.rotation = CommonValue.PlayerLeftRotation;
+                nextPosition -= CommonValue.PlayerLeftRightVector;
                 break;
             }
             case CommonEnum.PlayerDirection.RIGHT:
             {
-                _root.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-                nextPosition += new Vector3(1, 0, 0);
+                _root.rotation = CommonValue.PlayerRightRotation;
+                nextPosition += CommonValue.PlayerLeftRightVector;
                 break;
             }
         }
 
         _player.DOComplete();
+        _player.transform.DOScale(CommonValue.PlayerOriginalScale, 0.1f);
         _player.DOMove(nextPosition, 0.25f).OnStart(() =>
         {
             _animator.Play("Jump W Root");
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        _player.DOComplete();
         _player.DOScale(new Vector3(1f, 0.1f, 1f), 0.1f);
     }
 }

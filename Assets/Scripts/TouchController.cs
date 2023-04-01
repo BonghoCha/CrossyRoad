@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,6 +24,7 @@ public class TouchController : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     public void OnPointerDown(PointerEventData eventData)
     {
         _touchPoint = eventData.position;
+        _playerController.transform.DOScale(CommonValue.PlayerPressedScale, 0.1f);
     }
 
     public void OnPointerUp(PointerEventData eventData)
