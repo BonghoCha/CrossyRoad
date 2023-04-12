@@ -14,6 +14,7 @@ public class CommonEnum : MonoBehaviour
 
     public enum ObstacleType
     {
-        CAR
+        CAR,
+        TRAIN
     }
 }

@@ -15,12 +15,32 @@ public class ObstacleController : MonoBehaviour
     private void Start()
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.OnStart(() =>
+        switch (_type)
         {
-            transform.position = _spawnPoint.position;
-            _duration = Random.Range(5f, 10f);
-        });
-        sequence.Append(transform.DOMove(_endPoint.position, _duration));
-        sequence.SetLoops(-1);
+            case CommonEnum.ObstacleType.CAR:
+            {
+                sequence.OnStart(() =>
+                {
+                    transform.position = _spawnPoint.position;
+                    _duration = Random.Range(5f, 10f);
+                });
+                sequence.Append(transform.DOMove(_endPoint.position, _duration));
+                sequence.SetLoops(-1);
+                break;
+            }
+            case CommonEnum.ObstacleType.TRAIN:
+            {
+                sequence.OnStart(() =>
+                {
+                    transform.position = _spawnPoint.position;
+                    _duration = Random.Range(5f, 10f);
+                });
+                sequence.Append(transform.DOMove(_endPoint.position, _duration));
+                sequence.SetDelay(10f);
+                sequence.SetLoops(-1);
+                break;
+            }
+        }
+        sequence.Play();
     }
 }
